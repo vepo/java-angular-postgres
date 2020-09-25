@@ -1,0 +1,8 @@
+<div class="panel">
+    <div *ngFor="let message of messages" class="message" [ngClass]="message.level">
+        {{ message.content }}
+        <div class="timer">
+            {{ message.timeout }}s
+        </div>
+    </div>
+</div>

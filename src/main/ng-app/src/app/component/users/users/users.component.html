@@ -1,0 +1,67 @@
+<h1>
+    Usuários
+</h1>
+<forn [formGroup]="filterForm">
+    <app-table [pageChange]="pageChange()">
+        <div class="header">
+            <div sort-by="username">Username</div>
+            <div sort-by="firstName">First Name</div>
+            <div sort-by="lastName">Last Name</div>
+            <div sort-by="email">Email</div>
+            <div class="center">Administrador?</div>
+            <div class="center">Habilitado?</div>
+            <div class="center">Ações</div>
+        </div>
+        <div class="filter">
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>
+                <select formControlName="admin">
+                    <option [ngValue]="null">Todos</option>
+                    <option [ngValue]="true">Sim</option>
+                    <option [ngValue]="false">Não</option>
+                </select>
+            </div>
+            <div>
+                <select formControlName="enabled">
+                    <option [ngValue]="null">Todos</option>
+                    <option [ngValue]="true">Habilitados</option>
+                    <option [ngValue]="false">Desabilitados</option>
+                </select>
+            </div>
+            <div>
+                <button title="Novo" routerLink="/users/new" class="right small no-margin">
+                    <i class="fas fa-user-plus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="body" *ngFor="let user of users">
+            <div>{{ user.username }}</div>
+            <div>{{ user.firstName }}</div>
+            <div>{{ user.lastName }}</div>
+            <div>{{ user.email }}</div>
+            <div class="center">
+                <i class="far fa-{{ user.admin ? 'check-' : '' }}square"></i>
+            </div>
+            <div class="center">
+                <i class="far fa-{{ user.enabled ? 'check-' : '' }}square"></i>
+            </div>
+            <div class="center actions">
+                <a class="button" [routerLink]="['/','users', user.id]" title="Visalizar">
+                    <i class="fas fa-user"></i>
+                </a>
+                <a class="button" [routerLink]="['/', 'users', user.id, 'edit']" title="Editar">
+                    <i class="fas fa-user-edit"></i>
+                </a>
+                <button title="{{ user.enabled ? 'Desabilitar' : 'Habilitar' }}" (click)="toggleState(user)">
+                    <i class="fas fa-user-{{ user.enabled ? 'times' : 'check' }}"></i>
+                </button>
+            </div>
+        </div>
+        <div>
+            <a class="button right" routerLink="/users/new">Novo</a>
+        </div>
+    </app-table>
+</forn>

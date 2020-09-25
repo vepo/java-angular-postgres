@@ -1,0 +1,20 @@
+<div>
+    <form [formGroup]="todoForm">
+        <h2>Nova Atividade</h2>
+        <div class="control">
+            <input name="title" type="text" formControlName="title" />
+        </div>
+        <div class="control">
+            <button class="right" type="submit" [disabled]="!todoForm.valid" (click)="add()">Adicionar</button>
+        </div>
+    </form>
+</div>
+<h1>TODOs</h1>
+<div>
+    <div *ngFor="let todo of todos" class="todo">
+        <h3>{{ todo.title }}</h3>
+        <div class="content" contenteditable="true">
+            {{ todo.content }}
+        </div>
+    </div>
+</div>

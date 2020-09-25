@@ -1,0 +1,58 @@
+mp:
+  jwt:
+    verify:
+      publickey:
+        location: META-INF/resources/publicKey.pem
+      issuer: https://io.vepo.com
+    expiration:
+      time:
+        in:
+          minutes: 1024
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE
+password:
+  algorithm: PBKDF2WithHmacSHA512
+  key:
+    length: 512
+  iterations: 65536
+  salt: YdEjByDm1Nt4QZoKnbimCuH7hHqDE2lRkB4+Ml9sUu4AF9Y4zccAYoHqukF2KRYAPG8vHrYZ6znn2zB6tWQ3ibvhaNdFS5QgOAasNT44ckcVzHl6Xl80FiQm+QjcmC/zqQbk5RhNwXC6jVLWTrAu9UrqkuJIo0I8qc92tuIdLOj2gdmjLVhtW1Aaml6n3RG6pbTQ9/09nQRYqTRcxVkldDnm/5yC5i3mw1Fbmx/2Jb+ODRAjP5+/QjEK4b4T6Zse2mc/vP9x4I3yJ+3mUExqK4wLIS0bKho+qRRZCA0I/15Q7k4c9f8vCYwYIEf0Ret7NTk9SV6i83JyxE8GqPty7msMtnWWwAfqT8bN/FDosDrgjN95hmC+FbLDzlW999fwT1OUFPO9O7yCYAJm3M2cO+RZordzf0DTHXctS1l7rzXyNUUMfb5SWYVzT+5taNtR7hRRZq69GESDPuG2OhPy9tvA/dFS2/j8vPLydENbcO8dfBHpKlVs8aWWcXGDuQZCej+j/SI13wdeYLgmLTJ+P95rSZatGPHyN8rGGi5PLqD3DNbMoam8lAqXpGeoE65FnYvLzYisctAx41TYFb+eVtS8Fa/oX2uS8XOUGzk0I+8s4rqfUKRDfm37c4kX27FGitO7gsIGBcBkOzxWkXfTQMPsOp+d2ZGtUH+nEqw/FMs=
+thorntail:
+  datasources:
+    jdbc-drivers:
+      org.postgresql:
+        driver-class-name: org.postgresql.Driver
+        xa-datasource-class-name: org.postgresql.xa.PGXADataSource
+        driver-module-name: org.postgresql
+    data-sources:
+      jap-ds:
+        driver-name: org.postgresql
+        connection-url: jdbc:postgresql://localhost:5432/jap
+        user-name: postgres
+        password: password
+  microprofile:
+    jwtauth:
+      token:
+        issuedBy: "https://io.vepo.com"
+  security:
+    security-domains:
+      # name matches realm name used with LoginConfig
+      jwt-jaspi:
+        jaspi-authentication:
+          login-module-stacks:
+            roles-lm-stack:
+              login-modules:
+                # This stack performs the token verification and group to role mapping
+                - login-module: rm
+                  code: org.wildfly.swarm.microprofile.jwtauth.deployment.auth.jaas.JWTLoginModule
+                  flag: required
+                  module-options:
+                    rolesProperties: jwt-roles.properties
+          auth-modules:
+          # This module integrates the MP-JWT custom authentication mechanism into the web container
+            http:
+              code: org.wildfly.extension.undertow.security.jaspi.modules.HTTPSchemeServerAuthModule
+              module: org.wildfly.extension.undertow
+              flag: required
+              login-module-stack-ref: roles-lm-stack

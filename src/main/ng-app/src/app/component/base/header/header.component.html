@@ -1,0 +1,27 @@
+<nav class="dark">
+    <a class="brand" routerLink="/">Application</a>
+    <div class="menu">
+        <div class="menu-item" *ngIf="!isAuthenticated()">
+            <a routerLink="/login" routerLinkActive="active-link">Acessar</a>
+        </div>
+        <div class="menu-item dropdown" [ngClass]="{'expanded': userMenuExpanded }" *ngIf="isAuthenticated()">
+            <a class="nav-link dropdown-toggle" (click)="toggleUserMenu()">
+                {{ username }}
+            </a>
+            <div class="dropdown-menu">
+                <a routerLink="/profile" class="dropdown-item">Seu Perfil</a>
+                <div class="separator">
+                    <hr />
+                </div>
+                <ng-template [ngIf]="hasRole('ADMIN')">
+                    <a routerLink="/users" class="dropdown-item">Usuários</a>
+                    <div class="separator">
+                        <hr />
+                    </div>
+                </ng-template>
+                <a class="dropdown-item" (click)="logout()">Sair</a>
+            </div>
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+</nav>

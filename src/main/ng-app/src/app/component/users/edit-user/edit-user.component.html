@@ -1,0 +1,62 @@
+<form [formGroup]="userForm">
+    <h1>Usuário</h1>
+    <div class="control two-cols">
+        <label>Email</label>
+        <input type="email" formControlName="email" />
+        <div *ngIf="userForms.email.dirty && userForms.email.errors" class="invalid-feedback">
+            <div *ngIf="userForms.email.errors.required">Campo Obrigatório!</div>
+            <div *ngIf="userForms.email.errors.email">Email inválido!</div>
+        </div>
+    </div>
+    <div class="control two-cols">
+        <label>Nome de Usuário</label>
+        <input type="text" formControlName="username" />
+        <div *ngIf="userForms.username.dirty &&  userForms.username.errors" class="invalid-feedback">
+            <div *ngIf="userForms.username.errors.required">Campo Obrigatório!</div>
+            <div *ngIf="userForms.username.errors.pattern">Nome de Usuário inválido! Use apenas os caracteres
+                alfanuméricos e ("-", "_")</div>
+            <div *ngIf="userForms.username.errors.minlength">Nome de Usuário muito pequeno. Insira um texto com tamanho
+                entre 4 e 15.</div>
+            <div *ngIf="userForms.username.errors.maxlength">Nome de Usuário muito grande. Insira um texto com tamanho
+                entre 4 e 15.</div>
+        </div>
+    </div>
+    <div class="control two-cols">
+        <label>Nome</label>
+        <input type="text" formControlName="firstName" />
+        <div *ngIf="userForms.firstName.dirty && userForms.firstName.errors" class="invalid-feedback">
+            <div *ngIf="userForms.firstName.errors.required">Campo Obrigatório!</div>
+        </div>
+    </div>
+    <div class="control two-cols">
+        <label>Sobrenome</label>
+        <input type="text" formControlName="lastName" />
+        <div *ngIf="userForms.lastName.dirty && userForms.lastName.errors" class="invalid-feedback">
+            <div *ngIf="userForms.lastName.errors.required">Campo Obrigatório!</div>
+        </div>
+    </div>
+    <div class="control">
+        <label>Administrator?</label>
+        <input type="checkbox" formControlName="admin" />
+    </div>
+    <ng-template [ngIf]="!editMode()">
+        <div class="control">
+            <label>Gerar senha?</label>
+            <input type="checkbox" formControlName="generatePassword" />
+        </div>
+        <ng-template [ngIf]="generatePassword()">
+            <div class="control">
+                <label>Senha</label>
+                <input type="password" formControlName="password" />
+            </div>
+            <div class="control">
+                <label>Confirmação</label>
+                <input type="password" formControlName="confirmation" />
+            </div>
+        </ng-template>
+    </ng-template>
+    <div class="control">
+        <input type="submit" class="right" (click)="save()" value="Salvar" [disabled]="!userForm.valid || userForm.pristine" />
+        <button class="btn-secondary right" (click)="cancel()">Cancelar</button>
+    </div>
+</form>

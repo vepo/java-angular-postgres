@@ -1,0 +1,12 @@
+<div class="table">
+    <ng-content select=".header"></ng-content>
+    <ng-content select=".filter"></ng-content>
+    <ng-content select=".body"></ng-content>
+</div>
+<div class="pagination">
+    <button (click)="first()" [disabled]="firstDisabled">&lt;&lt;</button>
+    <button (click)="previous()" [disabled]="previousDisabled">&lt;</button>
+    <span class="current-page">{{ currentPage }}&nbsp;/&nbsp;{{ numberOfPages }}</span>
+    <button (click)="next()" [disabled]="nextDisabled">&gt;</button>
+    <button (click)="last()" [disabled]="lastDisabled">&gt;&gt;</button>
+</div>

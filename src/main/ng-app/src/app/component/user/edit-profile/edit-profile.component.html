@@ -1,0 +1,39 @@
+<form [formGroup]="profileForm">
+    <h1>Perfil</h1>
+    <div class="control two-cols">
+        <label>Email</label>
+        <input type="email" formControlName="email" />
+        <div *ngIf="profileForms.email.errors" class="invalid-feedback">
+            <div *ngIf="profileForms.email.errors.required">Campo Obrigatório!</div>
+            <div *ngIf="profileForms.email.errors.email">Email inválido!</div>
+        </div>
+    </div>
+    <div class="control two-cols">
+        <label>Nome de Usuário</label>
+        <input type="text" formControlName="username" />
+        <div *ngIf="profileForms.username.errors" class="invalid-feedback">
+            <div *ngIf="profileForms.username.errors.required">Campo Obrigatório!</div>
+            <div *ngIf="profileForms.username.errors.pattern">Nome de Usuário inválido! Use apenas os caracteres alfanuméricos e ("-", "_")</div>
+            <div *ngIf="profileForms.username.errors.minlength">Nome de Usuário muito pequeno. Insira um texto com tamanho entre 4 e 15.</div>
+            <div *ngIf="profileForms.username.errors.maxlength">Nome de Usuário muito grande. Insira um texto com tamanho entre 4 e 15.</div>
+        </div>
+    </div>
+    <div class="control two-cols">
+        <label>Nome</label>
+        <input type="text" formControlName="firstName" />
+        <div *ngIf="profileForms.firstName.errors" class="invalid-feedback">
+            <div *ngIf="profileForms.firstName.errors.required">Campo Obrigatório!</div>
+        </div>
+    </div>
+    <div class="control two-cols">
+        <label>Sobrenome</label>
+        <input type="text" formControlName="lastName" />
+        <div *ngIf="profileForms.lastName.errors" class="invalid-feedback">
+            <div *ngIf="profileForms.lastName.errors.required">Campo Obrigatório!</div>
+        </div>
+    </div>
+    <div class="control">
+        <input type="submit" class="right" (click)="save()" value="Salvar" [disabled]="!profileForm.valid || profileForm.pristine" />
+        <button class="btn-secondary right" (click)="cancel()">Cancelar</button>
+    </div>
+</form>

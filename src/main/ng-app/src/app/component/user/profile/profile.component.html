@@ -1,0 +1,5 @@
+<h1>{{ user.username }}<a routerLink="/profile/edit" class="button right">Editar</a></h1>
+<div>{{ user.firstName}} {{ user.lastName }}</div>
+<div>{{ user.email }}</div>
+<div>Administrador? <input type="checkbox" checked="{{ user.admin}}" disabled /></div>
+<div><a routerLink="/profile/password/edit" class="button right">Alterar Senha</a> </div>

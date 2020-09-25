@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+// Palete https://coolors.co/000000-14213d-fca311-e5e5e5-ffffff-d72638
+
+/* You can add global styles to this file, and also import other style files */
+html {
+    font-family: 'Open Sans', sans-serif;
+    color      : #555555;
+}
+
+body {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+    outline   : 0;
+}
+
+.center {
+    text-align: center;
+}
+
+h1 {
+    margin: 10px 0;
+    width : 100%;
+}
+
+.dark {
+    * {
+        background-color: #333;
+        color           : #FFF;
+    }
+
+    background-color: #333;
+    color           : #FFF;
+
+    a {
+        color          : #FFF;
+        text-decoration: none;
+
+        &:link,
+        &:visited,
+        &:hover,
+        &:active {
+            color: #FFF;
+        }
+    }
+}
+
+input[type="submit"],
+a.button,
+button {
+    &:disabled {
+        cursor          : default;
+        background-color: #707070;
+        border-color    : #707070;
+    }
+
+    &:not(:disabled) {
+        &:hover {
+            cursor          : pointer;
+            background-color: #28427B;
+        }
+    }
+
+    &.btn-secondary {
+        background-color: #7A7A7A;
+        border-color    : #7A7A7A;
+
+        &:hover {
+            background-color: #5C5C5C;
+            border-color    : #5C5C5C;
+        }
+    }
+
+    cursor          : pointer;
+    font-size       : 15px;
+    font-weight     : normal;
+    text-decoration : none;
+    padding         : 5px 15px;
+    color           : #FFFFFF;
+    background-color: #466EC3;
+    border          : solid 1px #466EC3;
+    border-radius   : 5px;
+    margin-left     : 10px;
+    margin-bottom   : 10px;
+
+    &.left {
+        float       : left;
+        margin-left : 0;
+        margin-right: 10px;
+    }
+
+    &.right {
+        float       : right;
+        margin-left : 10px;
+        margin-right: 0;
+    }
+
+    &.small {
+        padding  : 2px 15px;
+        font-size: 0.75em;
+    }
+
+    &.no-margin {
+        margin: 0;
+    }
+}
+
+.section {
+    width: 100%;
+}
+
+select,
+input {
+    width        : 100%;
+    border-radius: 4px;
+    border       : solid 1px #AAAAAA;
+    padding      : 6px 12px;
+    transition   : border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+    &:focus {
+        border-color: #93AADC;
+        box-shadow  : 0 0 5px #93AADC;
+    }
+}
+
+input[type="checkbox"] {
+    width: auto;
+}
+
+/** Forms **/
+form {
+    display  : flex;
+    flex-flow: row wrap;
+
+
+    label {
+        display    : block;
+        font-weight: bold;
+    }
+
+    input[type="submit"] {
+        width: auto;
+    }
+
+    .invalid-feedback {
+        color    : #D72638;
+        font-size: 0.8em;
+    }
+
+    .control {
+        margin-bottom: 10px;
+        display      : inline-block;
+        flex         : 4 1 100%;
+        margin-right : 10px;
+
+
+        &.two-cols {
+            flex: 2 1 42%;
+        }
+    }
+}
+
+
+.table {
+    display: table;
+    width  : 100%;
+
+    >div {
+        &.header {
+            >div {
+                background-color: #474747;
+                color           : #FFFFFF;
+
+                &:first-child {
+                    border-radius: 5px 0 0 0;
+                }
+
+                &:last-child {
+                    border-radius: 0 5px 0 0;
+                }
+            }
+        }
+
+        &.filter {
+
+            input,
+            select {
+                width     : 100%;
+                text-align: center;
+                padding   : 0;
+                font-size : 0.9em;
+            }
+        }
+
+        display: table-row;
+
+        >div {
+            display: table-cell;
+            padding: 5px 10px;
+        }
+    }
+}
+
+.secondary-value {
+    color: #AAAAAA;
+}
+
+.actions {
+    white-space: nowrap;
+}

@@ -1,0 +1,10 @@
+# Eclipse
+.classpath
+.settings
+.project
+
+# Maven
+target
+
+# Project
+src/main/webapp

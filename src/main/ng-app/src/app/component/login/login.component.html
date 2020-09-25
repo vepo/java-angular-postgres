@@ -1,0 +1,14 @@
+<form [formGroup]="loginForm">
+    <h1>Acessar</h1>
+    <div class="control">
+        <label>Nome de Usuário</label>
+        <input name="username" type="text" formControlName="username" />
+    </div>
+    <div class="control">
+        <label>Senha</label>
+        <input name="password" type="password" formControlName="password" />
+    </div>
+    <div class="control">
+        <button class="right" type="submit" [disabled]="!loginForm.valid" (click)="login()">Acessar</button>
+    </div>
+</form>
